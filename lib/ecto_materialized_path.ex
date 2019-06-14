@@ -73,6 +73,7 @@ defmodule EctoMaterializedPath do
     Ecto.Query.from(q in struct, where: q.id in ^parent_id, limit: 1)
   end
 
+  def parent_id(_, []), do: []
   def parent_id(_, path), do: List.last(path)
 
   def root(schema = %{ __struct__: struct }, path) when is_list(path) do

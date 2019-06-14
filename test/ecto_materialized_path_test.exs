@@ -18,7 +18,7 @@ defmodule EctoMaterializedPathTest do
       root_comment = %Comment{ id: 5, path: [] }
       query = Comment.parent(root_comment)
 
-      assert get_where_params(query) == [{nil, {:in, {0, :id}}}]
+      assert get_where_params(query) == [{[], {:in, {0, :id}}}]
       assert query.limit.expr == 1
     end
 
@@ -34,7 +34,7 @@ defmodule EctoMaterializedPathTest do
   describe "parent_id" do
     test "should return parent id if it's parent itself" do
       root_comment = %Comment{ id: 5, path: [] }
-      assert Comment.parent_id(root_comment) |> is_nil()
+      assert Comment.parent_id(root_comment) == []
     end
 
     test "should return parent id if it's a child" do
